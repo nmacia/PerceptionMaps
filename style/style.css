@@ -1,0 +1,85 @@
+html {
+    overflow-y: scroll;
+}
+
+body {
+    background: #ffffff;
+	font-family: "Amatic SC", sans-serif;
+	margin: 0;	
+	overflow-x: hidden;
+	padding: 0;
+}
+
+h1 {
+    font-family: "Amatic SC", sans-serif !important;
+    font-size: 80px !important;
+}
+
+.frame {
+  height: 600px;
+  border: 2px dashed #262626;
+}
+
+.btn {
+  color: #ffffff;
+  font-family: "Amatic SC", sans-serif !important;
+  font-size: 40px !important;
+  
+} 
+
+#output {
+  max-width: 100%;
+  max-height: 100%;
+  overflow-y: hidden;
+}
+
+.radio-selector input {
+    display: none;
+    margin: 0;
+    padding:0;
+    -webkit-appearance:none;
+       -moz-appearance:none;
+            appearance:none;
+}
+
+.happy { 
+    background-image: url('../img/happy.jpg');
+    background-position: center;
+}
+
+.sad {
+    background-image: url('../img/sad.jpg'); 
+    background-position: center;
+}
+
+.disgust { 
+    background-image: url('../img/disgust.jpg');
+    background-position: center;
+}
+
+.radio-selector input:active +.label-selector {
+    opacity: 0.5;
+}
+
+.radio-selector input:checked +.label-selector {
+    -webkit-filter: none;
+       -moz-filter: none;
+            filter: none;
+  opacity:1;
+}
+
+.label-selector{
+    cursor: pointer;
+    background-size: contain;
+    background-repeat: no-repeat;
+    display: inline-block;
+    width: 70px;
+    margin: auto;
+    height: 50px;
+}
+
+.label-selector:hover{
+    -webkit-filter: brightness(1) grayscale(0) opacity(0.5);
+       -moz-filter: brightness(1) grayscale(0) opacity(0.5);
+            filter: brightness(1) grayscale(0) opacity(0.5);
+}
