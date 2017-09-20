@@ -1,0 +1,107 @@
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="utf-8">
+</head>
+
+<html>
+<script src="jquery-3.1.1.min.js"></script>
+
+<style>
+.radio-selector input{
+    display:none;
+    margin:0;padding:0;
+    -webkit-appearance:none;
+       -moz-appearance:none;
+            appearance:none;
+}
+
+.happy{ background-image:url('happy.jpg'); background-position:center;}
+.sad{ background-image:url('sad.jpg'); background-position:center;}
+.clean{ background-image:url('clean.jpg'); background-position:center;}
+.dirty{ background-image:url('dirty.jpg'); background-position:center;}
+
+.radio-selector input:active +.label-selector{opacity: .9;}
+.radio-selector input:checked +.label-selector{
+    -webkit-filter: none;
+       -moz-filter: none;
+            filter: none;
+}
+
+.label-selector{
+    cursor:pointer;
+    background-size:contain;
+    background-repeat:no-repeat;
+    display:inline-block;
+    width:70px;
+    margin:auto;
+    height:50px;
+    -webkit-transition: all 100ms ease-in;
+       -moz-transition: all 100ms ease-in;
+            transition: all 100ms ease-in;
+    -webkit-filter: brightness(1) grayscale(1) opacity(1);
+       -moz-filter: brightness(1) grayscale(1) opacity(1);
+            filter: brightness(1) grayscale(1) opacity(1);
+}
+
+.label-selector:hover{
+    -webkit-filter: brightness(1) grayscale(0) opacity(1);
+       -moz-filter: brightness(1) grayscale(0) opacity(1);
+            filter: brightness(1) grayscale(0) opacity(1);
+}
+</style>
+
+<script>
+var loadFile = function(event) {
+  var reader = new FileReader();
+
+  reader.onload = function(){
+    var output = document.getElementById('output');
+    output.src = reader.result;
+    document.getElementById('output').style.display = "";
+    document.getElementById('upload').style.display = "";
+  };
+
+  reader.readAsDataURL(event.target.files[0]);
+};
+
+$(document).ready(function(){
+
+  $("#upfile").click(function () {
+    $("#file").trigger('click');
+  });
+
+  $("#upload").click(function () {
+    if ($('[name="emotion"]').is(':checked')) {
+        $("#submit").trigger('click');
+    } else {
+        document.getElementById('error').style.display = "";
+    }
+  });
+
+});
+</script>
+
+<center>
+<form action="iptc.php" method="post" enctype="multipart/form-data">
+    <img src="camera.png" width="85px" id="upfile" style="cursor:pointer" />
+    <input type="file" id="file" name="file" style="display:none" accept="image/*" onchange="loadFile(event)"><br/>
+    <hr/>
+
+    <div class="radio-selector">
+        <input id="happy" type="radio" name="emotion" value="happy" />
+        <label class="label-selector happy" for="happy"></label>
+        <input id="sad" type="radio" name="emotion" value="sad" />
+        <label class="label-selector sad" for="sad"></label>
+        <input id="clean" type="radio" name="emotion" value="clean" />
+        <label class="label-selector clean" for="clean"></label>
+        <input id="dirty" type="radio" name="emotion" value="dirty" />
+        <label class="label-selector dirty" for="dirty"></label>
+    </div>
+    <label id="error" name="error" style="display:none; font-weight: bold; color:red">Escull una emoció, si us plau...</label>
+    <hr/>
+    <input type="submit" id="submit" name="submit" style="display:none" value="Enviar">
+    <img style="width:100%; display:none" id="output"/>
+</form>
+<img src="upload.png" width="100px" style="display:none" id="upload" style="cursor:pointer" />
+</center>
+</html>
