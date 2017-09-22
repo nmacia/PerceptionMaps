@@ -46,17 +46,21 @@ h1 {
 }
 
 .happy { 
-    background-image: url('../img/happy.jpg');
+    background-image: url('../svg/happy.svg');
     background-position: center;
 }
 
 .sad {
-    background-image: url('../img/sad.jpg'); 
+    background-image: url('../svg/Sad.svg'); 
     background-position: center;
 }
 
+input:checked +.label-selector .sad {
+  filter: grayscale(0%);
+}
+
 .disgust { 
-    background-image: url('../img/disgust.jpg');
+    background-image: url('../svg/angry.svg');
     background-position: center;
 }
 
@@ -76,9 +80,9 @@ h1 {
     background-size: contain;
     background-repeat: no-repeat;
     display: inline-block;
-    width: 70px;
+    width: 90px;
     margin: auto;
-    height: 50px;
+    height: 80px;
 }
 
 .label-selector:hover{
@@ -88,6 +92,11 @@ h1 {
 }
 .logo {
   height: 200px;
+}
+
+.warning {
+  height:20px;
+  padding-right: 10px;
 }
 
 .btn .pictureup {
@@ -109,6 +118,7 @@ h1 {
   font-family: "Amatic SC", sans-serif;
   font-weight: 700;
   color: #000000;
+  font-size: 20px;
 }
 
 .emotions {
