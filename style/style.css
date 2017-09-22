@@ -17,7 +17,7 @@ h1 {
 
 .frame {
   max-height: inherit;
-  height: 500px;
+  min-height: 400px !important;
   border: 2px dashed #262626;
   padding-left: 0px !important;
   padding-right: 0px !important;
@@ -102,5 +102,38 @@ h1 {
 }
 
 .boxlogopic {
-  margin-top: 10px;
+  margin-top: 20px;
 }
+
+.alertemotion {
+  font-family: "Amatic SC", sans-serif;
+  font-weight: 700;
+  color: #000000;
+}
+
+.emotions {
+  width: inherit !important;
+}
+
+.bottombox {
+  padding-top: 15px;
+}
+
+.submit {
+  float:right !important;
+  padding-right: 0px !important;
+}
+
+.submitbutst {
+      background-color: #000000;
+  
+}
+
+.submitbutst:hover{
+    text-decoration: none;
+    filter: invert(100%);
+    border-width: 2px;
+    border-color: rgb(255, 255, 255);
+    color: rgb(255, 255, 255)!important;
+    
+      }

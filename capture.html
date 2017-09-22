@@ -53,10 +53,9 @@
             <img style="width:100%; display:none" id="output"/>
           </div>
       </div>
-       <div class="row">
+       <div class="row bottombox">
           <div class="col-md-3">
             <button type="button" class="btn btn-secondary btn-lg btn-block" id="upfile" style="cursor:pointer"><img class="pictureup" src="img/upload_2.png" />Capture</button>
-            <button type="button" class="btn btn-secondary btn-lg btn-block" style="display:none" id="upload" style="cursor:pointer">Submit</button>
           </div>
           <div class="col-md-9 emotions">
             <form action="iptc.php" method="post" enctype="multipart/form-data">
@@ -70,11 +69,14 @@
                   <label class="label-selector disgust" for="disgust"></label>
               </div>
 
-              <label id="error" name="error" style="display:none; font-weight: bold; color:red">Escull una emoció, si us plau...</label>
+              <label class="alertemotion" id="error" name="error" style="display:none;">Escull una emoció, si us plau...</label>
               <input type="submit" id="submit" name="submit" style="display:none" value="Enviar">
               
               </form>
           </div>
+         <div class="col-md-3 submit">
+         <button type="button" class="btn btn-secondary btn-lg btn-block submitbutst" style="display:none" id="upload" style="cursor:pointer">Submit</button>
+         </div>
       </div>
     </div>    
    </body>
