@@ -10,78 +10,70 @@
     <script src="jquery-3.1.1.min.js"></script>
 
     <script>
-    var loadFile = function(event) {
-      var reader = new FileReader();
-
-      reader.onload = function(){
-        var output = document.getElementById('output');
-        output.src = reader.result;
-        document.getElementById('output').style.display = "";
-        document.getElementById('upload').style.display = "";
+      var loadFile = function(event) {
+        var reader = new FileReader();
+        reader.onload = function(){
+          var output = document.getElementById('output');
+          output.src = reader.result;
+          document.getElementById('output').style.display = "";
+          document.getElementById('upload').style.display = "";
+        };
+        reader.readAsDataURL(event.target.files[0]);
       };
 
-      reader.readAsDataURL(event.target.files[0]);
-    };
-
-       function changeColour(value) {
+      function changeColour(value) {
         $("body").css("background", value);
       };
-    $(document).ready(function(){
+    
+      $(document).ready(function(){
 
-      $("#upfile").click(function () {
-        $("#file").trigger('click');
+        $("#upfile").click(function () {
+          $("#file").trigger('click');
+        });
+
+        $("#upload").click(function () {
+          if ($('[name="emotion"]').is(':checked')) {
+              $("#submit").trigger('click');
+          } else {
+              document.getElementById('error').style.display = "";
+          }
+        });
       });
-
-      $("#upload").click(function () {
-        if ($('[name="emotion"]').is(':checked')) {
-            $("#submit").trigger('click');
-        } else {
-            document.getElementById('error').style.display = "";
-        }
-      });
-
-    });
     </script>
   </head>
 
   <body class="no-scrolling">
-  <div class="container">
-    
-  
-   
-<form action="iptc.php" method="post" enctype="multipart/form-data">
-    <div class="col-md-3">
-      <img class="logo" src="img/logodm4ym.png" />
+    <div class="container">
+      <form action="iptc.php" method="post" enctype="multipart/form-data">
+        <div class="col-md-3">
+          <img class="logo" src="img/logodm4ym.png" />
+        </div>
+        <input type="submit" id="submit" name="submit" style="display:none" value="Enviar">    
+        <!-- Frame picture -->
+        <div class="col-md-9 frame">
+          <img style="width:100%; display:none" id="output"/>
+        </div>
+        <label class="alertemotion" id="error" name="error" style="display:none;">Escull una emoció!</label>
+
+        <div class="row">   
+          <div class="col-md-3 bottombox">
+            <!-- Search image -->
+            <button type="button" class="btn btn-secondary btn-lg btn-block" id="upfile" style="cursor:pointer"><img class="pictureup" src="img/upload.png" />Capture</button>
+            <input class="frame" type="file" id="file" name="file" style="display:none" accept="image/*" onchange="loadFile(event)">
+          </div>
+          <div class="radio-selector col-md-6 bottombox">
+            <input id="happy" type="radio" name="emotion" value="happy" onClick="changeColour('#ffcd05')" />
+            <label class="label-selector happy" for="happy"></label>
+            <input id="sad" type="radio" name="emotion" value="sad" onClick="changeColour('#3393c7')" />
+            <label class="label-selector sad" for="sad"></label>
+            <input id="angry" type="radio" name="emotion" value="angry" onClick="changeColour('#b12b25')" />
+            <label class="label-selector angry" for="angry"></label>
+          </div>
+          <div class="col-md-3 bottombox">
+            <button type="button" class="btn btn-secondary btn-lg btn-block submitbutst" style="display:none" id="upload" style="cursor:pointer">Submit</button>  
+          </div>
+        </div>
+      </form>
     </div>
-  
-    <label class="alertemotion" id="error" name="error" style="display:none;">Escull una emoció, si us plau...</label>
-    
-    <input type="submit" id="submit" name="submit" style="display:none" value="Enviar">
-  <div class="col-md-9 frame">
-    <img style="width:100%; display:none" id="output"/>
-    </div>
-    <div class="row">
-      
-      
-    <div class="col-md-3 bottombox">
-      <!--img src="camera.png" width="85px" id="upfile" style="cursor:pointer" /-->
-      <button type="button" class="btn btn-secondary btn-lg btn-block" id="upfile" style="cursor:pointer"><img class="pictureup" src="img/upload_2.png" />Capture</button>
-      <input class="frame" type="file" id="file" name="file" style="display:none" accept="image/*" onchange="loadFile(event)">
-    </div>
-    <div class="radio-selector col-md-6 bottombox">
-      <input id="happy" type="radio" name="emotion" value="happy" onClick="changeColour('#ffcd05')" /> <!--onClick="changeColour('#ffcd05')"-->
-      <label class="label-selector happy" for="happy"></label>
-      <input id="sad" type="radio" name="emotion" value="sad" onClick="changeColour('#3393c7')" /> <!--onClick="changeColour('#3393c7')"-->
-      <label class="label-selector sad" for="sad"></label>
-      <input id="angry" type="radio" name="emotion" value="angry" onClick="changeColour('#b12b25')" /> <!--onClick="changeColour('#b12b25')" -->
-      <label class="label-selector angry" for="angry"></label>
-    </div>
-    <div class="col-md-3 bottombox">
-    <button type="button" class="btn btn-secondary btn-lg btn-block submitbutst" style="display:none" id="upload" style="cursor:pointer">Submit</button>  
-    </div>
-   </div>
-</form>
-<!--img src="upload.png" width="100px" style="display:none" id="upload" style="cursor:pointer" /-->
- </div>
   </body>
 </html>
