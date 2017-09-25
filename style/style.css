@@ -69,9 +69,11 @@ input:checked +.label-selector .sad {
 }
 
 .radio-selector input:checked +.label-selector {
-    -webkit-filter: none;
+  
+    filter:invert(100%);
+   /* -webkit-filter: none;
        -moz-filter: none;
-            filter: none;
+            filter: none;*/ 
   opacity:1;
 }
 
