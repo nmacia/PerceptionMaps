@@ -108,11 +108,11 @@ input:checked +.label-selector .sad {
     filter:invert(100%);
 }
 
-.btn:hover .pictureup {
+.btn:hover  .pictureup {
   filter:invert(0%);
 }
 
-.btn:active {
+.btn:active, .btn:focus {
   filter:invert(0%);  
 }
 
