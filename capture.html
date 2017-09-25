@@ -23,12 +23,16 @@
         reader.readAsDataURL(event.target.files[0]);
       };
 
+      function changeColour(value) {
+        $("body").css("background", value);
+      }
+      
     $(document).ready(function(){
 
       $("#upfile").click(function () {
         $("#file").trigger('click');
       });
-
+    
       $("#upload").click(function () {
         if ($('[name="emotion"]').is(':checked')) {
             $("#submit").trigger('click');
@@ -61,11 +65,11 @@
             <form action="iptc.php" method="post" enctype="multipart/form-data">
               
               <div class="radio-selector">
-                  <input id="happy" type="radio" name="emotion" value="happy" />
+                  <input id="happy" type="radio" name="emotion" value="happy" onClick="changeColour('#ffcd05')"/>
                   <label class="label-selector happy" for="happy"></label>
-                  <input id="sad" type="radio" name="emotion" value="sad" />
+                  <input id="sad" type="radio" name="emotion" value="sad" onClick="changeColour('#3393c7')" />
                   <label class="label-selector sad" for="sad"></label>
-                  <input id="disgust" type="radio" name="emotion" value="disgust" />
+                  <input id="disgust" type="radio" name="emotion" value="disgust" onClick="changeColour('#b12b25')" />
                   <label class="label-selector disgust" for="disgust"></label>
               </div>
 

@@ -105,11 +105,15 @@ input:checked +.label-selector .sad {
     height: 35px;
     margin-right: 10px;
     visibility: visible;
-  filter:invert(100%);
+    filter:invert(100%);
 }
 
 .btn:hover .pictureup {
   filter:invert(0%);
+}
+
+.btn:active {
+  filter:invert(0%);  
 }
 
 .boxlogopic {
