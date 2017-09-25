@@ -49,7 +49,7 @@ if ($uploadOk == 1) {
 if ($uploadOk == 1) {
     $path = $target_file;
 
-    if (isset($_POST['emotion']) && in_array($_POST['emotion'], array('happy', 'sad', 'clean', 'dirty')))
+    if (isset($_POST['emotion']) && in_array($_POST['emotion'], array('happy', 'sad', 'angry')))
         $em = $_POST['emotion'];
     else
         $em = "No emotion set";
