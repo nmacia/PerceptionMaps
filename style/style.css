@@ -28,7 +28,13 @@ h1 {
   font-family: "Amatic SC", sans-serif !important;
   font-size: 40px !important;
   
+  
 } 
+
+#upfile {
+  
+  background-color: darkgray !important;
+}
 
 #output {
   max-width: 100%;
