@@ -57,7 +57,7 @@ h1 {
 }
 
 .sad {
-    background-image: url('../svg/Sad.svg'); 
+    background-image: url('../svg/sad.svg'); 
     background-position: center;
 }
 
@@ -65,7 +65,7 @@ input:checked +.label-selector .sad {
   filter: grayscale(0%);
 }
 
-.disgust { 
+.angry { 
     background-image: url('../svg/angry.svg');
     background-position: center;
 }

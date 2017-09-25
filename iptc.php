@@ -48,13 +48,6 @@ if ($uploadOk == 1) {
 
 if ($uploadOk == 1) {
     $path = $target_file;
-  
-   /* Colores:
-      Happy: #FFCD05
-      Sad: #3393c7ff
-      Angry: #B12B25
-   
-   */
 
     if (isset($_POST['emotion']) && in_array($_POST['emotion'], array('happy', 'sad', 'clean', 'dirty')))
         $em = $_POST['emotion'];
