@@ -8,7 +8,7 @@
 
 <body>
   <style>
-    #dm4ym { height: 100%; }
+  #dm4ym { height: 100%; }
   </style>
 
   <div id="dm4ym"></div>
@@ -23,28 +23,61 @@
   mymap.setView([42.567050, 1.599213], 17);
   mymap.addLayer(osm);
 
+  var baseMaps = {
+    "OSM": osm,
+  };
+
   var happyIcon = L.icon({
-      iconUrl: 'img/happy.png',
+    iconUrl: 'img/happy.png',
   });
 
   var sadIcon = L.icon({
-      iconUrl: 'img/sad.png'
+    iconUrl: 'img/sad.png'
   });
 
   var angryIcon = L.icon({
-      iconUrl: 'img/angry.png'
+    iconUrl: 'img/angry.png'
   });
 
-  var geojsonLayer = new L.GeoJSON.AJAX("2017-DM4YM.geojson", {
-      pointToLayer: function (feature, latlng) {
-          switch (feature.properties.Emotion) {
-              case 'happy': return L.marker(latlng, {icon: happyIcon});
-              case 'sad': return L.marker(latlng, {icon: sadIcon});
-              case 'angry': return L.marker(latlng, {icon: angryIcon});
-          }
-      }
-  }).addTo(mymap);
+  var categories = {},
+  category;
 
-</script>
+  var overlays = {},
+  categoryName,
+  categoryArray;
+
+  var geojsonLayer = new L.GeoJSON.AJAX("2017-DM4YM.geojson", {
+    pointToLayer: function (feature, latlng) {
+      switch (feature.properties.Emotion) {
+        case 'happy': return L.marker(latlng, {icon: happyIcon});
+        case 'sad': return L.marker(latlng, {icon: sadIcon});
+        case 'angry': return L.marker(latlng, {icon: angryIcon});
+      }
+    },
+    onEachFeature(feature, layer) {
+      category = feature.properties.Emotion;
+
+      if (typeof categories[category] === "undefined") {
+        categories[category] = [];
+      }
+
+      categories[category].push(layer);
+    }
+  });
+
+  geojsonLayer.on('data:loaded', function() {
+    for (categoryName in categories) {
+      categoryArray = categories[categoryName];
+      overlays[categoryName] = L.layerGroup(categoryArray);
+    }
+
+    overlays['happy'].addTo(mymap);
+    overlays['sad'].addTo(mymap);
+    overlays['angry'].addTo(mymap);
+
+    L.control.layers(baseMaps, overlays).addTo(mymap);
+  });
+
+  </script>
 </body>
 </html>
