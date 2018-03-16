@@ -1,0 +1,50 @@
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <link rel="stylesheet" href="leaflet/leaflet.css" />
+  <script src="leaflet/leaflet.js"></script>
+  <script src="leaflet/leaflet.ajax.min.js"></script>
+</head>
+
+<body>
+  <style>
+    #dm4ym { height: 100%; }
+  </style>
+
+  <div id="dm4ym"></div>
+
+  <script>
+  var mymap = L.map('dm4ym');
+
+  var osmUrl='http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+  var osmAttrib='Map data © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors';
+  var osm = new L.TileLayer(osmUrl, {attribution: osmAttrib});
+
+  mymap.setView([42.567050, 1.599213], 17);
+  mymap.addLayer(osm);
+
+  var happyIcon = L.icon({
+      iconUrl: 'img/happy.png',
+  });
+
+  var sadIcon = L.icon({
+      iconUrl: 'img/sad.png'
+  });
+
+  var angryIcon = L.icon({
+      iconUrl: 'img/angry.png'
+  });
+
+  var geojsonLayer = new L.GeoJSON.AJAX("2017-DM4YM.geojson", {
+      pointToLayer: function (feature, latlng) {
+          switch (feature.properties.Emotion) {
+              case 'happy': return L.marker(latlng, {icon: happyIcon});
+              case 'sad': return L.marker(latlng, {icon: sadIcon});
+              case 'angry': return L.marker(latlng, {icon: angryIcon});
+          }
+      }
+  }).addTo(mymap);
+
+</script>
+</body>
+</html>
