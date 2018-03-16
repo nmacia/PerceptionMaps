@@ -1,0 +1,46 @@
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <link rel="stylesheet" href="leaflet/leaflet.css" />
+  <script src="leaflet/leaflet.js"></script>
+</head>
+
+<body>
+  <style>
+  #dm4ym { height: 640px; }
+  </style>
+
+  <div id="dm4ym"></div>
+
+  <script>
+  var mymap = L.map('dm4ym');
+
+  var osmUrl='http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+  var osmAttrib='Map data © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors';
+  var osm = new L.TileLayer(osmUrl, {minZoom: 8, maxZoom: 12, attribution: osmAttrib});
+
+  mymap.setView([51.505, -0.09], 15);
+  mymap.addLayer(osm);
+
+  var marker = L.marker([51.5, -0.09]).addTo(mymap);
+
+  var circle = L.circle([51.508, -0.11], {
+    color: 'red',
+    fillColor: '#fff',
+    fillOpacity: 0.5,
+    radius: 200
+  }).addTo(mymap);
+
+  var polygon = L.polygon([
+    [51.509, -0.08],
+    [51.503, -0.06],
+    [51.51, -0.047]
+  ]).addTo(mymap);
+
+  marker.bindPopup("<b>Hello world!</b><br>I am a popup.").openPopup();
+  circle.bindPopup("I am a circle.");
+  polygon.bindPopup("I am a polygon.");
+
+</script>
+</body>
+</html>
