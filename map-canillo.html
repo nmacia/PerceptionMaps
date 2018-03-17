@@ -2,8 +2,11 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <link rel="stylesheet" href="leaflet/leaflet.css" />
+  <link rel="stylesheet" href="style/map-style.css" />
+  
   <script src="leaflet/leaflet.js"></script>
   <script src="leaflet/leaflet.ajax.min.js"></script>
+  <script src="leaflet/leaflet-providers.js"></script>
 </head>
 
 <body>
@@ -15,28 +18,35 @@
 
   <script>
   var mymap = L.map('dm4ym');
+    
+    
 
-  var osmUrl='http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
-  var osmAttrib='Map data © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors';
-  var osm = new L.TileLayer(osmUrl, {attribution: osmAttrib});
+
+  // tile layers
+  var mapNik = L.tileLayer.provider('OpenStreetMap.Mapnik');
+  var blackAndWhiteLayer = L.tileLayer.provider('OpenStreetMap.BlackAndWhite');
+  var stamenTonerLayer = L.tileLayer.provider('Stamen.Toner');
 
   mymap.setView([42.567050, 1.599213], 17);
-  mymap.addLayer(osm);
+  mymap.addLayer(mapNik);
 
   var baseMaps = {
-    "OSM": osm,
+
+    "Mapnik": mapNik,
+    "blackAndWhite": blackAndWhiteLayer,
+    "stamenToner": stamenTonerLayer
   };
 
   var happyIcon = L.icon({
-    iconUrl: 'img/happy.png',
+    iconUrl: 'img/happy_f.png',
   });
 
   var sadIcon = L.icon({
-    iconUrl: 'img/sad.png'
+    iconUrl: 'img/sad_f.png'
   });
 
   var angryIcon = L.icon({
-    iconUrl: 'img/angry.png'
+    iconUrl: 'img/angry_f.png'
   });
 
   var categories = {},
@@ -53,15 +63,28 @@
         case 'sad': return L.marker(latlng, {icon: sadIcon});
         case 'angry': return L.marker(latlng, {icon: angryIcon});
       }
+      
+      
     },
     onEachFeature(feature, layer) {
+      var classNameInfoWindow = emotionCategoryInfoWindowStyle(feature);
+      
+      var customOptions =
+        {
+          'className' : classNameInfoWindow
+        };
+      
+      layer.bindPopup(definePopup(feature),customOptions);
+      
       category = feature.properties.Emotion;
 
       if (typeof categories[category] === "undefined") {
         categories[category] = [];
       }
-
+      
+      
       categories[category].push(layer);
+      
     }
   });
 
@@ -78,6 +101,59 @@
     L.control.layers(baseMaps, overlays).addTo(mymap);
   });
 
+    
+   function definePopup(feature) {
+      var props = feature.properties;
+
+     var emotion = props.Emotion;
+     var popupText = `
+      <div class="containerinfo">
+        <div class= "boxlogoandemotion">
+          <div class= "logo sqre">
+            <img src="Img/logodm4ym.png"> 
+          </div>
+          <div class= "emotion sqre">` +
+  '          <img src="svg/'+ emotion+ '.svg"> ' +
+  '          <p class="emotionname">'+emotion +'</p> '+
+  `        </div>
+        </div>
+          <div class= "boxtextdata">
+            <!--get from table description --> ` +
+  '          <p><b>date:</b> ' + props.Date + ' ' + props.Time + '</p> ' +
+  '          <p><b>description:</b>'+ ' ' + props.Notes +'</p> ' +
+  `       
+          </div>
+          <div class= "boximg"> ` +
+            "<img src='"+ props.SourceFile +"'"+                
+            ">"+"</img>" +             
+  `        </div>      
+      </div>
+  `;
+            
+      return popupText;
+  }
+    
+    function emotionCategoryInfoWindowStyle(feature) {
+      return feature.properties.Emotion + "-bg";
+    }
+    
+//    {
+//    "type": "Feature",
+//    "geometry": {
+//       "type": "Point",
+//       "coordinates":  [ 1.597731,42.567689 ]
+//    },
+//    "properties": {
+//    "FileName":"angry_IPTC59ca5a808ffc15.84268283.jpg",
+//    "Emotion":"angry",
+//    "Date":"9/26/17",
+//    "Time":"9:47:44",
+//    "GMT":"-4:00:00",
+//    "SourceFile":"http://www.nuriamacia.com/dm4ym/app/uploads/IPTC59ca5a808ffc15.84268283.jpg",
+//    "Classroom":"Da Vinci",
+//    "Notes":"construction site"
+//    }
+//  },
   </script>
 </body>
 </html>

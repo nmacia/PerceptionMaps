@@ -1,0 +1,75 @@
+.marker-info-window .boximg {
+  max-width: 160px;
+  min-width: 100px;
+}
+
+.leaflet-popup-content p {
+ margin: 0px !important; 
+}
+
+.leaflet-popup-content-wrapper {
+  max-width: 250px;
+  width: 200px;
+}
+
+.angry-bg .leaflet-popup-tip,
+.angry-bg .leaflet-popup-content-wrapper {
+  background-color: #b12b25;
+}
+
+.happy-bg .leaflet-popup-tip,
+.happy-bg .leaflet-popup-content-wrapper {
+  background-color: #ffcd05;
+}
+
+.sad-bg .leaflet-popup-tip,
+.sad-bg .leaflet-popup-content-wrapper  {
+  background-color: #3393c7;
+}
+
+
+/** 
+  Card-style Content Info Window 
+**/
+
+
+
+.boxlogoandemotion {
+ margin: 3mm;
+}
+
+.emotion.sqre {
+    float: right;
+}
+
+.logo img {
+  height: 15mm;
+}
+.emotion img {
+  height: 10mm;
+}
+
+.sqre {
+  
+display: inline-block;
+
+  
+}
+
+.emotionname {
+    font-family: "Amatic SC", sans-serif;
+    font-size: 16px;
+    margin: 0px !important;
+    text-align: center;
+}
+
+.boxtextdata {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-size: 12px;
+}
+
+
+.boximg img{
+  max-width: 160px;
+}
