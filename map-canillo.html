@@ -18,9 +18,6 @@
 
   <script>
   var mymap = L.map('dm4ym');
-    
-    
-
 
   // tile layers
   var mapNik = L.tileLayer.provider('OpenStreetMap.Mapnik');
@@ -31,10 +28,9 @@
   mymap.addLayer(mapNik);
 
   var baseMaps = {
-
     "Mapnik": mapNik,
-    "blackAndWhite": blackAndWhiteLayer,
-    "stamenToner": stamenTonerLayer
+    "BlackAndWhite": blackAndWhiteLayer,
+    "StamenToner": stamenTonerLayer
   };
 
   var happyIcon = L.icon({
@@ -63,8 +59,6 @@
         case 'sad': return L.marker(latlng, {icon: sadIcon});
         case 'angry': return L.marker(latlng, {icon: angryIcon});
       }
-      
-      
     },
     onEachFeature(feature, layer) {
       var classNameInfoWindow = emotionCategoryInfoWindowStyle(feature);
@@ -101,30 +95,28 @@
     L.control.layers(baseMaps, overlays).addTo(mymap);
   });
 
-    
    function definePopup(feature) {
-      var props = feature.properties;
+     var props = feature.properties;
 
      var emotion = props.Emotion;
      var popupText = `
       <div class="containerinfo">
         <div class= "boxlogoandemotion">
           <div class= "logo sqre">
-            <img src="Img/logodm4ym.png"> 
+            <img src="img/logodm4ym.png">
           </div>
           <div class= "emotion sqre">` +
-  '          <img src="svg/'+ emotion+ '.svg"> ' +
-  '          <p class="emotionname">'+emotion +'</p> '+
+  '            <img src="svg/'+ emotion+ '.svg"> ' +
+  '            <p class="emotionname">'+emotion +'</p> '+
   `        </div>
         </div>
           <div class= "boxtextdata">
             <!--get from table description --> ` +
   '          <p><b>date:</b> ' + props.Date + ' ' + props.Time + '</p> ' +
   '          <p><b>description:</b>'+ ' ' + props.Notes +'</p> ' +
-  `       
-          </div>
+  `       </div>
           <div class= "boximg"> ` +
-            "<img src='"+ props.SourceFile +"'"+                
+            "<img src='"+ props.SourceFile +"'"+
             ">"+"</img>" +             
   `        </div>      
       </div>
