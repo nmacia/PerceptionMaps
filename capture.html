@@ -1,79 +1,130 @@
 <!DOCTYPE html>
 
 <html lang="en">
-  <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta charset="utf-8">
-    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Amatic+SC">
-    <link rel="stylesheet" href="style/style.css">
-    <link rel="stylesheet" href="./style/bootstrap.min.css">
-    <script src="jquery-3.1.1.min.js"></script>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="utf-8">
+  <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Amatic+SC">
+  <link rel="stylesheet" href="style/style.css">
+  <link rel="stylesheet" href="./style/bootstrap.min.css">
+  <script src="jquery-3.1.1.min.js"></script>
+  <script src="exif.js"></script>
 
-    <script>
-      var loadFile = function(event) {
-        var reader = new FileReader();
-        reader.onload = function(){
-          var output = document.getElementById('output');
-          output.src = reader.result;
-          document.getElementById('output').style.display = "";
-          document.getElementById('upload').style.display = "";
-        };
-        reader.readAsDataURL(event.target.files[0]);
-      };
+  <script>
+  var loadFile = function(event) {
+    var reader = new FileReader();
+    reader.onload = function(){
+      var output = document.getElementById('output');
+      //output.src = reader.result;
+      document.getElementById('output').style.display = "";
+      document.getElementById('upload').style.display = "";
 
-      function changeColour(value) {
-        $("body").css("background", value);
-      };
-    
-      $(document).ready(function(){
+      var exif = EXIF.getData(output, function() {
+        var allMetaData = EXIF.getAllTags(this);
 
-        $("#upfile").click(function () {
-          $("#file").trigger('click');
-        });
+        var lat = allMetaData.GPSLatitude;
+        var lon = allMetaData.GPSLongitude;
 
-        $("#upload").click(function () {
-          if ($('[name="emotion"]').is(':checked')) {
-              $("#submit").trigger('click');
-          } else {
-              document.getElementById('error').style.display = "";
-          }
-        });
+        //Convert coordinates to WGS84 decimal
+        var latRef = allMetaData.GPSLatitudeRef || "N";
+        var lonRef = allMetaData.GPSLongitudeRef || "W";
+        lat = (lat[0] + lat[1]/60 + lat[2]/3600) * (latRef == "N" ? 1 : -1);
+        lon = (lon[0] + lon[1]/60 + lon[2]/3600) * (lonRef == "W" ? -1 : 1);
+
+        $("#position").val(`${lat},${lon}`);
       });
-    </script>
-  </head>
 
-  <body class="no-scrolling">
-    <div class="container">
-      <form action="iptc.php" method="post" enctype="multipart/form-data">
-        <div class="col-md-3">
-          <img class="logo" src="img/logodm4ym.png" />
-        </div>
-        <input type="submit" id="submit" name="submit" style="display:none" value="Enviar">    
-        <!-- Frame picture -->
-        <div class="col-md-9 frame">
-          <img style="width:100%; display:none" id="output"/>
-        </div>
-        <label class="alertemotion" id="error" name="error" style="display:none;">Escull una emoció!</label>
+      var img = document.createElement("img");
+      var canvas = document.createElement("canvas");
 
-        <div class="row">   
-          <div class="col-md-3 bottombox">
-            <!-- Search image -->
-            <button type="button" class="btn btn-secondary btn-lg btn-block" id="upfile" style="cursor:pointer"><img class="pictureup" src="img/upload.png" />Capture</button>
-            <input class="frame" type="file" id="file" name="file" style="display:none" accept="image/*" onchange="loadFile(event)">
-          </div>
-          <div class="radio-selector col-md-6 bottombox">
-            <input id="happy" type="radio" name="emotion" value="happy" onClick="changeColour('#ffcd05')" />
-            <label class="label-selector happy" for="happy"></label>
-            <input id="sad" type="radio" name="emotion" value="sad" onClick="changeColour('#3393c7')" />
-            <label class="label-selector sad" for="sad"></label>
-            <input id="angry" type="radio" name="emotion" value="angry" onClick="changeColour('#b12b25')" />
-            <label class="label-selector angry" for="angry"></label>
-          </div>
-          <div class="col-md-3 bottombox">
-            <button type="button" class="btn btn-secondary btn-lg btn-block submitbutst" style="display:none" id="upload" style="cursor:pointer">Submit</button>  
-          </div>
+      img.src = reader.result;
+
+      var ctx = canvas.getContext("2d");
+      ctx.drawImage(img, 0, 0);
+
+      var MAX_WIDTH = 640;
+      var MAX_HEIGHT = 480;
+      var width = img.width;
+      var height = img.height;
+
+      if (width > height) {
+        if (width > MAX_WIDTH) {
+          height *= MAX_WIDTH / width;
+          width = MAX_WIDTH;
+        }
+      } else {
+        if (height > MAX_HEIGHT) {
+          width *= MAX_HEIGHT / height;
+          height = MAX_HEIGHT;
+        }
+      }
+
+      canvas.width = width;
+      canvas.height = height;
+      var ctx = canvas.getContext("2d");
+      ctx.drawImage(img, 0, 0, width, height);
+
+      output.src = canvas.toDataURL("image/jpeg", 0.5);
+    };
+
+    reader.readAsDataURL(event.target.files[0]);
+  };
+
+  function changeColour(value) {
+    $("body").css("background", value);
+  };
+
+  $(document).ready(function(){
+
+    $("#upfile").click(function () {
+      $("#file").trigger('click');
+    });
+
+    $("#upload").click(function () {
+      if ($('[name="emotion"]').is(':checked')) {
+        $("#submit").trigger('click');
+      } else {
+        document.getElementById('error').style.display = "";
+      }
+    });
+  });
+  </script>
+</head>
+
+<body class="no-scrolling">
+  <div class="container">
+    <form action="iptc.php" method="post" enctype="multipart/form-data">
+      <div class="col-md-3">
+        <img class="logo" src="img/logodm4ym.png" />
+      </div>
+      <input type="submit" id="submit" name="submit" style="display:none" value="Enviar">
+      <!-- Frame picture -->
+      <div class="col-md-9 frame">
+        <img style="width:100%; display:none" id="output"/>
+      </div>
+      <label class="alertemotion" id="error" name="error" style="display:none;">Escull una emoció!</label>
+
+      <input id="position" type="hidden" name="position" value="">
+
+      <div class="row">
+        <div class="col-md-3 bottombox">
+          <!-- Search image -->
+          <button type="button" class="btn btn-secondary btn-lg btn-block" id="upfile" style="cursor:pointer"><img class="pictureup" src="img/upload.png" />Capture</button>
+          <input class="frame" type="file" id="file" name="file" style="display:none" accept="image/*" onchange="loadFile(event)">
         </div>
-      </form>
-    </div>
-  </body>
+        <div class="radio-selector col-md-6 bottombox">
+          <input id="happy" type="radio" name="emotion" value="happy" onClick="changeColour('#ffcd05')" />
+          <label class="label-selector happy" for="happy"></label>
+          <input id="sad" type="radio" name="emotion" value="sad" onClick="changeColour('#3393c7')" />
+          <label class="label-selector sad" for="sad"></label>
+          <input id="angry" type="radio" name="emotion" value="angry" onClick="changeColour('#b12b25')" />
+          <label class="label-selector angry" for="angry"></label>
+        </div>
+        <div class="col-md-3 bottombox">
+          <button type="button" class="btn btn-secondary btn-lg btn-block submitbutst" style="display:none" id="upload" style="cursor:pointer">Submit</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</body>
 </html>
