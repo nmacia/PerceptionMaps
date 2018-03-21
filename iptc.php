@@ -68,7 +68,13 @@ if ($uploadOk == 1) {
   } else {
     $em = "No emotion set";
   }
-  $iptc = array('2#005' => $em);
+
+  $iptc = ['2#005' => $em];
+
+  if (isset($_POST['createdate']) && $_POST['createdate'] != '') {
+    $iptc['2#055'] = explode(' ', $_POST['createdate'])[0];
+    $iptc['2#060'] = explode(' ', $_POST['createdate'])[1];
+  }
 
   $data = '';
 

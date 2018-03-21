@@ -25,6 +25,8 @@
         var exif = EXIF.getData(img, function() {
           var allMetaData = EXIF.getAllTags(this);
 
+          $('#createdate').val(allMetaData.DateTime);
+
           if (typeof allMetaData.GPSLatitude != "undefined") {
             var lat = allMetaData.GPSLatitude;
             var lon = allMetaData.GPSLongitude;
@@ -92,10 +94,12 @@
         var output = document.getElementById('output');
         var emotion = $('input[name=emotion]:checked', '#theform').val()
         var position = document.getElementById('position').value;
+        var date = document.getElementById('createdate').value;
         var fd = new FormData();
 
         fd.append("image", output.src);
         fd.append("emotion", emotion);
+        fd.append("createdate", date);
         fd.append("submit", "Enviar");
         fd.append("geoloc", position);
 
@@ -132,6 +136,7 @@
       <label class="alertemotion" id="error" name="error" style="display:none;">Escull una emoció!</label>
 
       <input id="position" type="hidden" name="position" value="">
+      <input id="createdate" type="hidden" name="createdate" value="">
 
       <div class="row">
         <div class="col-md-3 bottombox">
