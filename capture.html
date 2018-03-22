@@ -80,6 +80,12 @@
 
       document.getElementById('output').style.display = "";
       document.getElementById('upload').style.display = "";
+      
+      // Activate emotion selectors once picture is selected.
+      document.getElementById('happy').removeAttribute('disabled');
+      document.getElementById('sad').removeAttribute('disabled');
+      document.getElementById('angry').removeAttribute('disabled');
+
     };
 
     reader.readAsDataURL(event.target.files[0]);
@@ -150,11 +156,11 @@
           <input class="frame" type="file" id="file" name="file" style="display:none" accept="image/*" onchange="loadFile(event)">
         </div>
         <div class="radio-selector col-md-6 bottombox">
-          <input id="happy" type="radio" name="emotion" value="happy" onClick="changeColour('#ffcd05')" />
-          <label class="label-selector happy" for="happy"></label>
-          <input id="sad" type="radio" name="emotion" value="sad" onClick="changeColour('#3393c7')" />
+          <input id="happy" type="radio" name="emotion" value="happy" onClick="changeColour('#ffcd05')" disabled />
+          <label class="label-selector happy" for="happy" ></label>
+          <input id="sad" type="radio" name="emotion" value="sad" onClick="changeColour('#3393c7')" disabled />
           <label class="label-selector sad" for="sad"></label>
-          <input id="angry" type="radio" name="emotion" value="angry" onClick="changeColour('#b12b25')" />
+          <input id="angry" type="radio" name="emotion" value="angry" onClick="changeColour('#b12b25')" disabled />
           <label class="label-selector angry" for="angry"></label>
         </div>
         <div class="col-md-3 bottombox sfright">

@@ -105,7 +105,8 @@ h1 {
   width: 90px;
 }
 
-.label-selector:hover {
+.label-selector:hover,
+input:disabled+label {
   -webkit-filter: brightness(1) grayscale(0) opacity(0.5);
      -moz-filter: brightness(1) grayscale(0) opacity(0.5);
           filter: brightness(1) grayscale(0) opacity(0.5);
