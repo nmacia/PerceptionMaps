@@ -31,6 +31,10 @@ h1 {
   
 } 
 
+.container {
+  padding-top: 15px;
+}
+
 #upfile {
   
   background-color: darkgray !important;
@@ -159,4 +163,88 @@ input:checked +.label-selector .sad {
     color: rgb(255, 255, 255)!important;
     
       }
+
+.box-footer {
+    bottom: 0;
+    position: relative;
+    width: 100%;
+}
+
+.informationsource {
+    font-weight: 800;
+    font-size: 15px;
+    
+}
+
+.copyright {
+    position: relative;
+    width: auto;
+    bottom: 0px;
+    margin: auto;
+    padding: 0px;
+    color: inherit;
+    font-family: "Amatic SC", sans-serif;
+    text-decoration: none;
+}
+
+.copyright a {
+  color: inherit;
+}
+
+footer {
+    margin-bottom: 0;
+    color: darkgray;
+}
+
+@media (max-width: 426px) {
+  .frame {
+  min-height: 200px !important;
+  }
+  .logo {
+    width: 40%;
+    height: auto;
+  }
+  
+  .label-selector {
+    width: 30%;
+    height: 52px;
+  }
+  .bottombox {
+    width: 49% !important;
+    display: inline-block;
+  }
+  
+  .bfw {
+    width: 100% !important;
+  }
+  .btn {
+      font-size: 27px !important;
+  }
+  .btn .pictureup {
+        height: 30px;
+  }
+  .sfright {
+ float: right;
+  }
+  
+  .radio-selector {
+    vertical-align: top;
+  }
+  
+    /* TODO Capture button when label is selected
+  {background-color: inherit;
+    border-color: white;
+  border-width: 2px;}*/
+  
+  #upfile:active, #upfile:focus, #upfile:visited {
+    background-color: inherit !important;
+    border-width: 2px;
+    border-color: rgb(0, 0, 0);
+    }
+  .box-footer {
+    padding-top: 15px;
+}
+}
+
+
 

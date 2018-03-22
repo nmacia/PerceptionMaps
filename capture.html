@@ -144,7 +144,7 @@
       <input id="createdate" type="hidden" name="createdate" value="">
 
       <div class="row">
-        <div class="col-md-3 bottombox">
+        <div class="col-md-3 bottombox bfw">
           <!-- Search image -->
           <button type="button" class="btn btn-secondary btn-lg btn-block" id="upfile" style="cursor:pointer"><img class="pictureup" src="img/upload.png" />Capture</button>
           <input class="frame" type="file" id="file" name="file" style="display:none" accept="image/*" onchange="loadFile(event)">
@@ -157,11 +157,18 @@
           <input id="angry" type="radio" name="emotion" value="angry" onClick="changeColour('#b12b25')" />
           <label class="label-selector angry" for="angry"></label>
         </div>
-        <div class="col-md-3 bottombox">
+        <div class="col-md-3 bottombox sfright">
           <button type="button" class="btn btn-secondary btn-lg btn-block submitbutst" style="display:none" id="upload" style="cursor:pointer">Submit</button>
         </div>
       </div>
     </form>
+    <footer class="box-footer">
+    <div class="box-cont-footer">
+      <div class="copyright">
+        <p><a class="informationsource" target="_blank" href="https://www.media.mit.edu/projects/andorra-innovation/overview/">(¡)</a> <a target="_blank" href="http://www.nuriamacia.com/">Núria Macià</a>, <a target="_blank" href="https://twitter.com/aleixdorca">Aleix Dorca</a> and <a target="_blank" href="https://www.media.mit.edu/people/devisj/">Juanita Devis</a> © 2018</p>
+      </div>
+    </div>
+  </footer>
   </div>
 </body>
 </html>
