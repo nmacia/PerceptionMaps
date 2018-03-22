@@ -42,8 +42,7 @@ h1 {
 } 
 
 #upfile {
-  background-color: darkgray !important; /* TODO: Replace html code */
-  cursor: pointer;
+  background-color: darkgray; /* TODO: Replace html code */
 }
 
 #output {
@@ -106,7 +105,7 @@ h1 {
 }
 
 .label-selector:hover,
-input:disabled+label {
+input:disabled + label {
   -webkit-filter: brightness(1) grayscale(0) opacity(0.5);
      -moz-filter: brightness(1) grayscale(0) opacity(0.5);
           filter: brightness(1) grayscale(0) opacity(0.5);
@@ -117,18 +116,21 @@ input:disabled+label {
   padding-right: 10px;
 }
 
-.btn .pictureup {
+.btn .picture-up {
   filter: invert(100%);
   height: 35px;
   margin-right: 10px;
   visibility: visible;
 }
 
-.btn:hover .pictureup {
+.btn:hover .picture-up {
   filter: invert(0%);
 }
 
-.btn:active, .btn:focus {
+.btn:active, 
+.btn:focus,
+.btn:active .picture-up,
+.btn:focus .picture-up {
   filter: invert(0%);  
 }
 
@@ -228,7 +230,7 @@ footer {
     font-size: 27px !important;
   }
   
-  .btn .pictureup {
+  .btn .picture-up {
     height: 30px;
   }
   

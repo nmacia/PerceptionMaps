@@ -93,6 +93,8 @@
 
   function changeColour(value) {
     $("body").css("background", value);
+    document.getElementById("upfile").style.backgroundColor = "transparent";
+    document.getElementById("upfile").style.borderColor = "#ffffff";
   };
 
   $(document).ready(function(){
@@ -152,7 +154,7 @@
       <div class="row">
         <div class="col-md-3 bottombox bfw">
           <!-- Search image -->
-          <button type="button" class="btn btn-secondary btn-lg btn-block" id="upfile"><img class="pictureup" src="img/upload.png" />Capture</button>
+          <button type="button" class="btn btn-secondary btn-lg btn-block btn-capture" id="upfile"><img class="picture-up" src="img/upload.png" />Capture</button>
           <input class="frame" type="file" id="file" name="file" style="display:none" accept="image/*" onchange="loadFile(event)">
         </div>
         <div class="radio-selector col-md-6 bottombox">
