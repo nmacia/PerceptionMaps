@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="./style/bootstrap.min.css">
   <script src="jquery-3.1.1.min.js"></script>
   <script src="exif.js"></script>
+  <script src="moment.js"></script>
 
   <script>
   var loadFile = function(event) {
@@ -25,7 +26,11 @@
         var exif = EXIF.getData(img, function() {
           var allMetaData = EXIF.getAllTags(this);
 
-          $('#createdate').val(allMetaData.DateTime);
+          if (typeof allMetaData.DateTime != "undefined" && allMetaData.DateTime.length > 0) {
+            $('#createdate').val(allMetaData.DateTime);
+          } else {
+            $('#createdate').val(moment().format('YYYY:MM:DD hh:mm:ss'));
+          }
 
           if (typeof allMetaData.GPSLatitude != "undefined") {
             var lat = allMetaData.GPSLatitude;
