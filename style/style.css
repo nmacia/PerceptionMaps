@@ -145,10 +145,15 @@ input:disabled + label {
   width: inherit !important;
 }
 
+.col-md-3, 
+.col-md-6 {
+  padding-top: 15px;  
+}
+/*
 .bottombox {
   padding-top: 15px;
 }
-
+*/
 .submit {
   float: right !important;
   padding-right: 0px !important;
@@ -217,7 +222,7 @@ footer {
     height: 52px;
   }
 
-  .bottombox {
+  .col-md-6 {
     width: 49% !important;
     display: inline-block;
   }
@@ -241,20 +246,7 @@ footer {
   .radio-selector {
     vertical-align: top;
   }
-  
-  /* TODO Capture button when label is selected
-  {background-color: inherit;
-  border-color: white;
-  border-width: 2px;}*/
-  
-  #upfile:active, 
-  #upfile:focus, 
-  #upfile:visited {
-    background-color: inherit !important;
-    border-color: #000000;
-    border-width: 2px;
-  }
-  
+   
   .box-footer {
     padding-top: 15px;
   }

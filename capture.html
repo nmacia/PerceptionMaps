@@ -95,6 +95,7 @@
     $("body").css("background", value);
     document.getElementById("upfile").style.backgroundColor = "transparent";
     document.getElementById("upfile").style.borderColor = "#ffffff";
+    document.getElementById("upfile").style.borderwidth = "2px";
   };
 
   $(document).ready(function(){
@@ -152,12 +153,12 @@
       <input id="createdate" type="hidden" name="createdate" value="">
 
       <div class="row">
-        <div class="col-md-3 bottombox bfw">
+        <div class="col-md-3 bfw">
           <!-- Search image -->
           <button type="button" class="btn btn-secondary btn-lg btn-block btn-capture" id="upfile"><img class="picture-up" src="img/upload.png" />Capture</button>
           <input class="frame" type="file" id="file" name="file" style="display:none" accept="image/*" onchange="loadFile(event)">
         </div>
-        <div class="radio-selector col-md-6 bottombox">
+        <div class="radio-selector col-md-6">
           <input id="happy" type="radio" name="emotion" value="happy" onClick="changeColour('#ffcd05')" disabled />
           <label class="label-selector happy" for="happy" ></label>
           <input id="sad" type="radio" name="emotion" value="sad" onClick="changeColour('#3393c7')" disabled />
@@ -165,7 +166,7 @@
           <input id="angry" type="radio" name="emotion" value="angry" onClick="changeColour('#b12b25')" disabled />
           <label class="label-selector angry" for="angry"></label>
         </div>
-        <div class="col-md-3 bottombox sfright">
+        <div class="col-md-3 sfright">
           <button type="button" class="btn btn-secondary btn-lg btn-block submitbutst" style="display:none" id="upload">Submit</button>
         </div>
       </div>
