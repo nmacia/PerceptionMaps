@@ -1,140 +1,141 @@
+/* ===GLOBAL=== */
+
 html {
-    overflow-y: scroll;
+  overflow-y: scroll;
 }
 
 body {
-    background: #ffffff;
-	font-family: "Amatic SC", sans-serif;
-	margin: 0;	
-	overflow-x: hidden;
-	padding: 0;
+  background: #ffffff;
+  font-family: "Amatic SC", sans-serif;
+  margin: 0;	
+  overflow-x: hidden;
+  padding: 0;
 }
 
 h1 {
-    font-family: "Amatic SC", sans-serif !important;
-    font-size: 80px !important;
+  font-family: "Amatic SC", sans-serif !important;
+  font-size: 80px !important;
+}
+
+.logo {
+  height: 200px;
+}
+
+/* ===PRIMARY=== */
+
+.container {
+  padding-top: 15px;
 }
 
 .frame {
   max-height: inherit;
   min-height: 400px !important;
   border: 2px dashed #262626;
-  padding-left: 0px !important;
-  padding-right: 0px !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
 }
 
 .btn {
   color: #ffffff;
   font-family: "Amatic SC", sans-serif !important;
   font-size: 40px !important;
-  
-  
 } 
 
-.container {
-  padding-top: 15px;
-}
-
 #upfile {
-  
-  background-color: darkgray !important;
+  background-color: darkgray !important; /* TODO: Replace html code */
+  cursor: pointer;
 }
 
 #output {
   max-width: 100%;
   max-height: 100%;
+  overflow-x: hidden
   overflow-y: hidden;
+  width:100%;
 }
 
 .radio-selector input {
-    display: none;
-    margin: 0;
-    padding:0;
-    -webkit-appearance:none;
-       -moz-appearance:none;
-            appearance:none;
+  display: none;
+  margin: 0;
+  padding: 0;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
 }
 
 .happy { 
-    background-image: url('../svg/happy.svg');
-    background-position: center;
+  background-image: url('../svg/happy.svg');
+  background-position: center;
 }
 
 .sad {
-    background-image: url('../svg/sad.svg'); 
-    background-position: center;
-}
-
-input:checked +.label-selector .sad {
-  filter: grayscale(0%);
+  background-image: url('../svg/sad.svg'); 
+  background-position: center;
 }
 
 .angry { 
-    background-image: url('../svg/angry.svg');
-    background-position: center;
+  background-image: url('../svg/angry.svg');
+  background-position: center;
 }
 
-.radio-selector input:active +.label-selector {
-    opacity: 0.5;
+/*input:checked +.label-selector .sad {
+  filter: grayscale(0%);
+}
+*/
+
+.radio-selector input:active + .label-selector {
+  opacity: 0.5;
 }
 
-.radio-selector input:checked +.label-selector {
-  
-    filter:invert(100%);
-   /* -webkit-filter: none;
-       -moz-filter: none;
-            filter: none;*/ 
+.radio-selector input:checked + .label-selector {
+  filter: invert(100%);
+  /* -webkit-filter: none;
+     -moz-filter: none;
+          filter: none;*/ 
   opacity:1;
 }
 
-.label-selector{
-    cursor: pointer;
-    background-size: contain;
-    background-repeat: no-repeat;
-    display: inline-block;
-    width: 90px;
-    margin: auto;
-    height: 80px;
+.label-selector {
+  background-repeat: no-repeat;
+  background-size: contain;
+  cursor: pointer;
+  display: inline-block;
+  height: 80px;
+  margin: auto;
+  width: 90px;
 }
 
-.label-selector:hover{
-    -webkit-filter: brightness(1) grayscale(0) opacity(0.5);
-       -moz-filter: brightness(1) grayscale(0) opacity(0.5);
-            filter: brightness(1) grayscale(0) opacity(0.5);
-}
-.logo {
-  height: 200px;
+.label-selector:hover {
+  -webkit-filter: brightness(1) grayscale(0) opacity(0.5);
+     -moz-filter: brightness(1) grayscale(0) opacity(0.5);
+          filter: brightness(1) grayscale(0) opacity(0.5);
 }
 
 .warning {
-  height:20px;
+  height: 20px;
   padding-right: 10px;
 }
 
 .btn .pictureup {
-    height: 35px;
-    margin-right: 10px;
-    visibility: visible;
-    filter:invert(100%);
+  filter: invert(100%);
+  height: 35px;
+  margin-right: 10px;
+  visibility: visible;
 }
 
-.btn:hover  .pictureup {
-  filter:invert(0%);
+.btn:hover .pictureup {
+  filter: invert(0%);
 }
 
 .btn:active, .btn:focus {
-  filter:invert(0%);  
-}
-
-.boxlogopic {
-  margin-top: 20px;
+  filter: invert(0%);  
 }
 
 .alertemotion {
   font-family: "Amatic SC", sans-serif;
+  font-size: 20px;
   font-weight: 700;
   color: #000000;
-  font-size: 20px;
 }
 
 .emotions {
@@ -146,69 +147,73 @@ input:checked +.label-selector .sad {
 }
 
 .submit {
-  float:right !important;
+  float: right !important;
   padding-right: 0px !important;
 }
 
 .submitbutst {
-      background-color: #000000;
-  
+  background-color: #000000;
 }
 
-.submitbutst:hover{
-    text-decoration: none;
-    filter: invert(100%);
-    border-width: 2px;
-    border-color: rgb(255, 255, 255);
-    color: rgb(255, 255, 255)!important;
-    
-      }
-
-.box-footer {
-    bottom: 0;
-    position: relative;
-    width: 100%;
+.submitbutst:hover {
+  border-color: #ffffff;
+  border-width: 2px;
+  color: #ffffff !important;
+  filter: invert(100%);
+  text-decoration: none;
 }
 
 .informationsource {
-    font-weight: 800;
-    font-size: 15px;
-    
+  font-size: 15px;    
+  font-weight: 800;
 }
 
 .copyright {
-    position: relative;
-    width: auto;
-    bottom: 0px;
-    margin: auto;
-    padding: 0px;
-    color: inherit;
-    font-family: "Amatic SC", sans-serif;
-    text-decoration: none;
+  bottom: 0;
+  color: inherit;
+  font-family: "Amatic SC", sans-serif; 
+  margin: auto;
+  padding: 0;
+  position: relative;
+  text-decoration: none;
+  width: auto;
 }
 
 .copyright a {
   color: inherit;
 }
 
+/* ===FOOTER=== */
+
 footer {
-    margin-bottom: 0;
-    color: darkgray;
+  margin-bottom: 0;
+  color: darkgray; /* TODO: Replace html code */
 }
+
+.box-footer {
+  bottom: 0;
+  position: relative;
+  width: 100%;
+}
+
+
+/* ===RESPONSIVENESS=== */
 
 @media (max-width: 426px) {
   .frame {
-  min-height: 200px !important;
+    min-height: 200px !important;
   }
+  
   .logo {
-    width: 40%;
     height: auto;
+    width: 40%;
   }
   
   .label-selector {
     width: 30%;
     height: 52px;
   }
+
   .bottombox {
     width: 49% !important;
     display: inline-block;
@@ -217,33 +222,39 @@ footer {
   .bfw {
     width: 100% !important;
   }
+  
   .btn {
-      font-size: 27px !important;
+    font-size: 27px !important;
   }
+  
   .btn .pictureup {
-        height: 30px;
+    height: 30px;
   }
+  
   .sfright {
- float: right;
+    float: right;
   }
   
   .radio-selector {
     vertical-align: top;
   }
   
-    /* TODO Capture button when label is selected
+  /* TODO Capture button when label is selected
   {background-color: inherit;
-    border-color: white;
+  border-color: white;
   border-width: 2px;}*/
   
-  #upfile:active, #upfile:focus, #upfile:visited {
+  #upfile:active, 
+  #upfile:focus, 
+  #upfile:visited {
     background-color: inherit !important;
+    border-color: #000000;
     border-width: 2px;
-    border-color: rgb(0, 0, 0);
-    }
+  }
+  
   .box-footer {
     padding-top: 15px;
-}
+  }
 }
 
 
