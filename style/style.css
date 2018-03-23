@@ -42,7 +42,7 @@ h1 {
 } 
 
 #upfile {
-  background-color: darkgray; /* TODO: Replace html code */
+  background-color: #737272; /* TODO: Replace html code */
 }
 
 #output {
@@ -171,10 +171,7 @@ input:disabled + label {
   text-decoration: none;
 }
 
-.informationsource {
-  font-size: 15px;    
-  font-weight: 800;
-}
+
 
 .copyright {
   bottom: 0;
@@ -193,16 +190,24 @@ input:disabled + label {
 
 /* ===FOOTER=== */
 
-footer {
-  margin-bottom: 0;
-  color: darkgray; /* TODO: Replace html code */
-}
-
 .box-footer {
+  margin-bottom: 0;
+  color: #9a9a9a; /* TODO: Replace html code */
   bottom: 0;
   position: relative;
   width: 100%;
 }
+
+.box-footer a:hover {
+  
+  color: #5d5c5c; /* TODO: Replace html code, please keep the classes, we don't know if we have to incorporate something else in the footer*/
+}
+
+.informationsource {
+  font-size: 15px;    
+  font-weight: 800;
+}
+
 
 
 /* ===RESPONSIVENESS=== */
@@ -249,6 +254,11 @@ footer {
    
   .box-footer {
     padding-top: 15px;
+    font-size: 10px;
+  }
+  
+  .informationsource {
+    font-size: 11px;
   }
   
     #upfile:active, #upfile:focus, #upfile:visited {
