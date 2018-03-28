@@ -1,0 +1,253 @@
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <link rel="stylesheet" href="leaflet/leaflet.css" />
+  <link rel="stylesheet" href="style/map-style.css" />
+
+  <script src="leaflet/leaflet.js"></script>
+  <script src="leaflet/leaflet.ajax.min.js"></script>
+  <script src="leaflet/leaflet-providers.js"></script>
+
+  <link rel="stylesheet" href="mc/MarkerCluster.css" />
+  <link rel="stylesheet" href="mc/MarkerCluster.Default.css" />
+  <script src="mc/leaflet.markercluster-src.js"></script>
+  <script src="mc/leaflet-markercluster.placementstrategies.src.js"></script>
+  <script src="mc/leaflet.featuregroup.subgroup.js"></script>
+</head>
+
+<body>
+  <style>
+  #dm4ym { height: 100%; }
+
+  .cluster {
+    background: #2d84c8;
+    border-radius: 50%;
+    text-align: center;
+    color: white;
+    font-weight: 700;
+    border: 1px solid #2d84c8;
+    font-family: monospace;
+  }
+
+  .cluster:before {
+    content: ' ';
+    position: absolute;
+    border-radius: 50%;
+    z-index: -1;
+    top: 1px;
+    left: 1px;
+    right: 1px;
+    bottom: 1px;
+    border: 1px solid white;
+  }
+
+  .digits-1 {
+    font-size: 14px;
+    height: 28px;
+    width: 28px;
+    line-height: 28px;
+    margin-top: -14px;
+    margin-left: -14px;
+  }
+
+  .digits-2 {
+    font-size: 16px;
+    height: 34px;
+    width: 34px;
+    line-height: 35px;
+    margin-top: -17px;
+    margin-left: -17px;
+  }
+
+  .digits-2:before {
+    border-width: 2px;
+  }
+
+  .digits-3 {
+    font-size: 18px;
+    height: 48px;
+    width: 47px;
+    line-height: 47px;
+    border-width: 3px;
+    margin-top: -24px;
+    margin-left: -24px;
+  }
+
+  .digits-3:before {
+    border-width: 3px;
+  }
+
+  .digits-4 {
+    font-size: 18px;
+    height: 58px;
+    width: 58px;
+    line-height: 57px;
+    border-width: 4px;
+    margin-top: -29px;
+    margin-left: -29px;
+  }
+
+  .digits-4:before {
+    border-width: 4px;
+  }
+  </style>
+
+  <div id="dm4ym"></div>
+
+  <script>
+  var mymap = L.map('dm4ym');
+
+  // tile layers
+  var mapNik = L.tileLayer.provider('OpenStreetMap.Mapnik');
+  var blackAndWhiteLayer = L.tileLayer.provider('OpenStreetMap.BlackAndWhite');
+  var stamenTonerLayer = L.tileLayer.provider('Stamen.Toner');
+
+  mymap.setView([42.567050, 1.599213], 17);
+  mymap.addLayer(mapNik);
+
+  var baseMaps = {
+    "Mapnik": mapNik,
+    "BlackAndWhite": blackAndWhiteLayer,
+    "StamenToner": stamenTonerLayer
+  };
+
+  var happyIcon = L.icon({
+    iconUrl: 'img/happy_f.png',
+  });
+
+  var sadIcon = L.icon({
+    iconUrl: 'img/sad_f.png'
+  });
+
+  var angryIcon = L.icon({
+    iconUrl: 'img/angry_f.png'
+  });
+
+  var categories = {},
+  category;
+
+  var overlays = {},
+  categoryName,
+  categoryArray;
+
+  //var markers = L.markerClusterGroup();
+
+  var markers = L.markerClusterGroup({
+    maxClusterRadius: 90,
+    spiderfyOnMaxZoom:true,
+    disableClusteringAtZoom: 20,
+    elementsPlacementStrategy: "original-locations",
+    polygonOptions: {
+      color: '#2d84c8',
+      weight: 4,
+      opacity: 1,
+      fillOpacity: 0.5
+    },
+    iconCreateFunction: function(cluster) {
+      var count = cluster.getChildCount();
+      var digits = (count+'').length;
+      return new L.divIcon({
+        html: count,
+        className:'cluster digits-'+digits,
+        iconSize: null
+      });
+    }
+  });
+
+  var geojsonLayer = new L.GeoJSON.AJAX("2017-DM4YM.geojson", {
+    pointToLayer: function (feature, latlng) {
+      switch (feature.properties.Emotion) {
+        case 'happy': return L.marker(latlng, {icon: happyIcon});
+        case 'sad': return L.marker(latlng, {icon: sadIcon});
+        case 'angry': return L.marker(latlng, {icon: angryIcon});
+      }
+    },
+    onEachFeature(feature, layer) {
+      var classNameInfoWindow = emotionCategoryInfoWindowStyle(feature);
+
+      var customOptions =
+      {
+        'className' : classNameInfoWindow
+      };
+
+      layer.bindPopup(definePopup(feature),customOptions);
+
+      category = feature.properties.Emotion;
+
+      if (typeof categories[category] === "undefined") {
+        categories[category] = [];
+      }
+
+      categories[category].push(layer);
+    }
+  });
+
+  geojsonLayer.on('data:loaded', function() {
+    for (categoryName in categories) {
+      categoryArray = categories[categoryName];
+      overlays[categoryName] = L.featureGroup.subGroup(markers, categoryArray);
+    }
+
+    markers.addTo(mymap);
+
+    overlays['happy'].addTo(mymap);
+    overlays['sad'].addTo(mymap);
+    overlays['angry'].addTo(mymap);
+
+    L.control.layers(baseMaps, overlays).addTo(mymap);
+  });
+
+  function definePopup(feature) {
+    var props = feature.properties;
+
+    var emotion = props.Emotion;
+    var popupText = `
+    <div class="containerinfo">
+    <div class= "boxlogoandemotion">
+    <div class= "logo sqre">
+    <img src="img/logodm4ym.png">
+    </div>
+    <div class= "emotion sqre">` +
+    '            <img src="svg/'+ emotion+ '.svg"> ' +
+    '            <p class="emotionname">'+emotion +'</p> '+
+    `        </div>
+    </div>
+    <div class= "boxtextdata">
+    <!--get from table description --> ` +
+    '          <p><b>date:</b> ' + props.Date + ' ' + props.Time + '</p> ' +
+    '          <p><b>description:</b>'+ ' ' + props.Notes +'</p> ' +
+    `       </div>
+    <div class= "boximg"> ` +
+    "<img src='"+ props.SourceFile +"'"+
+    ">"+"</img>" +
+    `        </div>
+    </div>
+    `;
+
+    return popupText;
+  }
+
+  function emotionCategoryInfoWindowStyle(feature) {
+    return feature.properties.Emotion + "-bg";
+  }
+
+  //    {
+  //    "type": "Feature",
+  //    "geometry": {
+  //       "type": "Point",
+  //       "coordinates":  [ 1.597731,42.567689 ]
+  //    },
+  //    "properties": {
+  //    "FileName":"angry_IPTC59ca5a808ffc15.84268283.jpg",
+  //    "Emotion":"angry",
+  //    "Date":"9/26/17",
+  //    "Time":"9:47:44",
+  //    "GMT":"-4:00:00",
+  //    "SourceFile":"http://www.nuriamacia.com/dm4ym/app/uploads/IPTC59ca5a808ffc15.84268283.jpg",
+  //    "Classroom":"Da Vinci",
+  //    "Notes":"construction site"
+  //    }
+  //  },
+  </script>
+</body>
+</html>
