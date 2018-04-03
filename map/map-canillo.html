@@ -23,17 +23,14 @@
   var mapNik = L.tileLayer.provider('OpenStreetMap.Mapnik');
   var blackAndWhiteLayer = L.tileLayer.provider('OpenStreetMap.BlackAndWhite');
   var stamenTonerLayer = L.tileLayer.provider('Stamen.Toner');
-  var WImagEsriLayer = L.tileLayer.provider('Esri.WorldImagery');
-    
 
-  mymap.setView([51.43555, 5.48055], 17); 
-  mymap.addLayer(stamenTonerLayer);
+  mymap.setView([42.567050, 1.599213], 17);
+  mymap.addLayer(mapNik);
 
   var baseMaps = {
     "Mapnik": mapNik,
     "BlackAndWhite": blackAndWhiteLayer,
-    "StamenToner": stamenTonerLayer,
-    "WImagEsriLayer": WImagEsriLayer
+    "StamenToner": stamenTonerLayer
   };
 
   var happyIcon = L.icon({
@@ -55,7 +52,7 @@
   categoryName,
   categoryArray;
 
-  var geojsonLayer = new L.GeoJSON.AJAX("test-eindhoven.geojson", {
+  var geojsonLayer = new L.GeoJSON.AJAX("2017-DM4YM.geojson", {
     pointToLayer: function (feature, latlng) {
       switch (feature.properties.Emotion) {
         case 'happy': return L.marker(latlng, {icon: happyIcon});
@@ -101,10 +98,10 @@
    function definePopup(feature) {
      var props = feature.properties;
 
-       var emotion = props.Emotion;
+     var emotion = props.Emotion;
      var popupText = `
       <div class="containerinfo">
-        <div class= "boxlogoandemotion">
+        <div class= "box-logoandemotion">
           <div class= "logo sqre">
             <img src="img/logodm4ym.png">
           </div>
@@ -118,7 +115,7 @@
   '          <p><b>date:</b> ' + props.Date + ' ' + props.Time + '</p> ' +
   '          <p><b>description:</b>'+ ' ' + props.Notes +'</p> ' +
   `       </div>
-          <div class= "boximg"> ` +
+          <div class= "box-img"> ` +
             "<img src='"+ props.SourceFile +"'"+
             ">"+"</img>" +             
   `        </div>      
@@ -132,22 +129,23 @@
       return feature.properties.Emotion + "-bg";
     }
     
-/*//  {
-    "type": "Feature",
-    "geometry": {
-       "type": "Point",
-       "coordinates":  [ 5.48474722222222,51.4310416666667 ]
-    },
-    "properties": {
-    "SourceFile":"./uploads/IPTC5ab2962269e437.16168948.jpg",
-    "ObjectName":"happy"
-    "Date":"9/26/17", //todo
-    "Time":"9:47:44", //todo
-    "GMT":"-4:00:00", //todo
-    }
-  }, */
-    
-
+//    {
+//    "type": "Feature",
+//    "geometry": {
+//       "type": "Point",
+//       "coordinates":  [ 1.597731,42.567689 ]
+//    },
+//    "properties": {
+//    "FileName":"angry_IPTC59ca5a808ffc15.84268283.jpg",
+//    "Emotion":"angry",
+//    "Date":"9/26/17",
+//    "Time":"9:47:44",
+//    "GMT":"-4:00:00",
+//    "SourceFile":"http://www.nuriamacia.com/dm4ym/app/uploads/IPTC59ca5a808ffc15.84268283.jpg",
+//    "Classroom":"Da Vinci",
+//    "Notes":"construction site"
+//    }
+//  },
   </script>
 </body>
 </html>

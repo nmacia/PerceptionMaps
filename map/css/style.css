@@ -1,0 +1,78 @@
+
+/*========== MAIN ==========*/
+
+
+#dm4ym { 
+  height: 100%; 
+}
+
+/*========== INFOWINDOW ==========*/
+
+.box-logoandemotion {
+  margin: 3mm;
+}
+
+.logo img {
+  height: 15mm;
+}
+
+.emotion.sqre {
+  float: right;
+}
+
+.emotion img {
+  height: 10mm;
+}
+
+.sqre {
+  display: inline-block;
+}
+
+.emotion-name {
+  font-family: "Amatic SC", sans-serif;
+  font-size: 16px;
+  margin: 0 !important;
+  text-align: center;
+}
+
+.box-text {
+  font-size: 12px;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+.box-img img {
+  max-width: 160px;
+}
+
+/*========== LEAFLET ==========*/
+
+.marker-info-window .box-img {
+  max-width: 160px;
+  min-width: 100px;
+}
+
+.leaflet-popup-content p {
+  margin: 0 !important; 
+}
+
+.leaflet-popup-content-wrapper {
+  max-width: 250px;
+  width: 200px;
+}
+
+.angry-bg .leaflet-popup-tip,
+.angry-bg .leaflet-popup-content-wrapper {
+  background-color: #b12b25;
+}
+
+.happy-bg .leaflet-popup-tip,
+.happy-bg .leaflet-popup-content-wrapper {
+  background-color: #ffcd05;
+}
+
+.sad-bg .leaflet-popup-tip,
+.sad-bg .leaflet-popup-content-wrapper {
+  background-color: #3393c7;
+}
+
