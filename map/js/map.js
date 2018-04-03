@@ -86,6 +86,7 @@ function definePopup(feature) {
    
   var emotion = feature.properties.emotion;
   var sourceFile = feature.properties.sourcefile;
+  sourceFile = sourceFile.replace(/\.\/uploads/g, "\.\./uploads");
   
   var popupText = `
   <div class="containerinfo">
