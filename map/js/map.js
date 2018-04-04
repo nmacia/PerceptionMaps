@@ -79,9 +79,9 @@ jQuery.get('output.csv', function(csvContents) {
       var customOptions = {
         'className' : classNameInfoWindow
       };
-      layer.bindPopup(definePopup(feature),customOptions);
+      layer.bindPopup(definePopup(feature), customOptions);
       category = feature.properties.emotion;
-      if (typeof categories[category] === "undefined") {
+      if ( typeof categories[category] === "undefined" ) {
         categories[category] = [];
       }
       categories[category].push(layer);
@@ -94,14 +94,13 @@ jQuery.get('output.csv', function(csvContents) {
 
 // Add overlay controls. 
 window.onload = function () { 
+  console.log(categories);
   for (categoryName in categories) {
     categoryArray = categories[categoryName];
     overlays[categoryName] = L.layerGroup(categoryArray);
+    // Tick layers selected in the control.
+    overlays[categoryName].addTo(mymap);
   }
-
-  overlays['happy'].addTo(mymap);
-  overlays['sad'].addTo(mymap);
-  overlays['angry'].addTo(mymap);
 
   L.control.layers(baseMaps, overlays).addTo(mymap);
 }
