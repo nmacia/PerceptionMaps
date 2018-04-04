@@ -44,7 +44,7 @@ jQuery.get('output.csv', function(csvContents) {
     latitudeTitle: 'GPSLatitude',
     longitudeTitle: 'GPSLongitude',
     firstLineTitles: false, 
-    titles: ['SourceFile', 'GPSLatitude', 'GPSLongitude', 'Emotion'],
+    titles: ['SourceFile', 'GPSLatitude', 'GPSLongitude', 'Emotion', 'Date'],
     fieldSeparator: ',',
     pointToLayer: function (feature, latlng) {
       switch (feature.properties.emotion) {
@@ -115,7 +115,8 @@ function definePopup(feature) {
   var emotion = feature.properties.emotion;
   var sourceFile = feature.properties.sourcefile;
   sourceFile = sourceFile.replace(/\.\/uploads/g, "\.\./uploads");
-                                 
+  var date = (feature.properties.date != '' ? feature.properties.date : "--");
+  
   var popupText = `
   <div class="containerinfo">
     <div class= "box-logoandemotion">
@@ -123,18 +124,18 @@ function definePopup(feature) {
         <img src="img/logodm4ym.png">
       </div>
       <div class= "emotion sqre">` +
-  '         <img src="svg/'+ emotion + '.svg" /> ' +
-  '         <p class="emotion-name">'+ emotion + '</p> '+
-  `       </div>
+  '     <img src="svg/'+ emotion + '.svg" /> ' +
+  '     <p class="emotion-name">'+ emotion + '</p> '+
+  `   </div>
     </div>
     <div class= "box-text">
       <!--get from table description --> ` +
-  /*'        <!p><b>date:</b> ' + props.Date + ' ' + props.Time + '</p> ' +*/
+  '   <p><b>date:</b> ' + date + '</p> ' +
   /*'        <p><b>description:</b>'+ ' ' + props.Notes +'</p> ' +*/
-  `     </div>
+  ` </div>
     <div class= "box-img"> ` +
       "<img src='"+ sourceFile +"' />" +             
-  `     </div>      
+  ` </div>      
   </div>
   `;
 
