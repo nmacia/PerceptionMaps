@@ -36,8 +36,32 @@ var overlays = {},
 categoryName,
 categoryArray;
 
+var markers = L.markerClusterGroup({
+  maxClusterRadius: 90,
+  spiderfyOnMaxZoom: true,
+  disableClusteringAtZoom: 20,
+  elementsPlacementStrategy: "original-locations",
+  polygonOptions: {
+    color: '#2d84c8',
+    weight: 4,
+    opacity: 1,
+    fillOpacity: 0.5
+  },
+  iconCreateFunction: function(cluster) {
+    var count = cluster.getChildCount();
+    var digits = (count+'').length;
+    return new L.divIcon({
+      html: count,
+      className: 'cluster digits-'+digits,
+      iconSize: null
+    });
+  }
+});
+
+var geocsvLayer;
+
 jQuery.get('output.csv', function(csvContents) {
-  var geocsvLayer = L.geoCsv(csvContents, {
+    geocsvLayer = L.geoCsv(csvContents, {
     latitudeTitle: 'GPSLatitude',
     longitudeTitle: 'GPSLongitude',
     firstLineTitles: false, 
@@ -65,10 +89,11 @@ jQuery.get('output.csv', function(csvContents) {
   });
   
   mymap.addLayer(geocsvLayer);
+  
 });
 
-// TODO: Remove overlays if not necessary
-/*geojsonLayer.on('data:loaded', function() {
+// Add overlay controls. 
+window.onload = function () { 
   for (categoryName in categories) {
     categoryArray = categories[categoryName];
     overlays[categoryName] = L.layerGroup(categoryArray);
@@ -79,15 +104,14 @@ jQuery.get('output.csv', function(csvContents) {
   overlays['angry'].addTo(mymap);
 
   L.control.layers(baseMaps, overlays).addTo(mymap);
-});
-*/
+}
 
 function definePopup(feature) {
    
   var emotion = feature.properties.emotion;
   var sourceFile = feature.properties.sourcefile;
   sourceFile = sourceFile.replace(/\.\/uploads/g, "\.\./uploads");
-  
+                                 
   var popupText = `
   <div class="containerinfo">
     <div class= "box-logoandemotion">
@@ -112,3 +136,6 @@ function definePopup(feature) {
 
   return popupText;
 }
+
+
+
