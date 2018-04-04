@@ -7,6 +7,7 @@ var blackAndWhiteLayer = L.tileLayer.provider('OpenStreetMap.BlackAndWhite');
 var stamenTonerLayer = L.tileLayer.provider('Stamen.Toner');
 var WImagEsriLayer = L.tileLayer.provider('Esri.WorldImagery');
 
+//mymap.setView([42.567050, 1.599213], 17); // Andorra
 mymap.setView([51.43555, 5.48055], 17); 
 mymap.addLayer(stamenTonerLayer);
 
@@ -35,28 +36,6 @@ category;
 var overlays = {},
 categoryName,
 categoryArray;
-
-var markers = L.markerClusterGroup({
-  maxClusterRadius: 90,
-  spiderfyOnMaxZoom: true,
-  disableClusteringAtZoom: 20,
-  elementsPlacementStrategy: "original-locations",
-  polygonOptions: {
-    color: '#2d84c8',
-    weight: 4,
-    opacity: 1,
-    fillOpacity: 0.5
-  },
-  iconCreateFunction: function(cluster) {
-    var count = cluster.getChildCount();
-    var digits = (count+'').length;
-    return new L.divIcon({
-      html: count,
-      className: 'cluster digits-'+digits,
-      iconSize: null
-    });
-  }
-});
 
 var geocsvLayer;
 
@@ -92,17 +71,43 @@ jQuery.get('output.csv', function(csvContents) {
   
 });
 
+var markers = L.markerClusterGroup({
+  maxClusterRadius: 90,
+  spiderfyOnMaxZoom: true,
+  disableClusteringAtZoom: 20,
+  elementsPlacementStrategy: "original-locations",
+  polygonOptions: {
+    color: '#2d84c8',
+    weight: 4,
+    opacity: 1,
+    fillOpacity: 0.5
+  },
+  iconCreateFunction: function(cluster) {
+    var count = cluster.getChildCount();
+    var digits = (count+'').length;
+    return new L.divIcon({
+      html: count,
+      className: 'cluster digits-'+digits,
+      iconSize: null
+    });
+  }
+});
+  
 // Add overlay controls. 
 window.onload = function () { 
-  console.log(categories);
-  for (categoryName in categories) {
+  
+  for (categoryName in categories) {    
     categoryArray = categories[categoryName];
-    overlays[categoryName] = L.layerGroup(categoryArray);
+    //overlays[categoryName] = L.layerGroup(categoryArray);
+    overlays[categoryName] = L.featureGroup.subGroup(markers, categoryArray);
     // Tick layers selected in the control.
     overlays[categoryName].addTo(mymap);
   }
 
+  markers.addTo(mymap);
+ 
   L.control.layers(baseMaps, overlays).addTo(mymap);
+    
 }
 
 function definePopup(feature) {
