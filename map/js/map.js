@@ -66,9 +66,21 @@ jQuery.get('output.csv', function(csvContents) {
       categories[category].push(layer);
     }   
   });
+   
+  // Add overlay controls.
+  for (categoryName in categories) {    
+    categoryArray = categories[categoryName];
+    //overlays[categoryName] = L.layerGroup(categoryArray);
+    overlays[categoryName] = L.featureGroup.subGroup(markers, categoryArray);
+    // Tick layers selected in the control.
+    overlays[categoryName].addTo(mymap);
+  }
+  L.control.layers(baseMaps, overlays).addTo(mymap);
   
-  mymap.addLayer(geocsvLayer);
-  
+  // Add markers and layer to map
+  markers.addLayer(geocsvLayer);
+  mymap.addLayer(markers);  
+
 });
 
 var markers = L.markerClusterGroup({
@@ -93,23 +105,6 @@ var markers = L.markerClusterGroup({
   }
 });
   
-// Add overlay controls. 
-window.onload = function () { 
-  
-  for (categoryName in categories) {    
-    categoryArray = categories[categoryName];
-    //overlays[categoryName] = L.layerGroup(categoryArray);
-    overlays[categoryName] = L.featureGroup.subGroup(markers, categoryArray);
-    // Tick layers selected in the control.
-    overlays[categoryName].addTo(mymap);
-  }
-
-  markers.addTo(mymap);
- 
-  L.control.layers(baseMaps, overlays).addTo(mymap);
-    
-}
-
 function definePopup(feature) {
    
   var emotion = feature.properties.emotion;
