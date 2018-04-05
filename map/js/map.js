@@ -77,7 +77,7 @@ jQuery.get('output.csv', function(csvContents) {
   }
   L.control.layers(baseMaps, overlays).addTo(mymap);
   
-  // Add markers and layer to map
+  // Add markers and layer to map.
   markers.addLayer(geocsvLayer);
   mymap.addLayer(markers);  
 
@@ -99,10 +99,25 @@ var markers = L.markerClusterGroup({
   },
   iconCreateFunction: function(cluster) {
     var count = cluster.getChildCount();
+    
+    // Change cluster color according to main emotion.
+    var countByEmotion = [0, 0, 0];
+    var classCluster = ['cluster-angry', 'cluster-happy', 'cluster-sad'];
+    var e = cluster.getAllChildMarkers();
+    
+    e.forEach(function(m) {  
+      switch (m.feature.properties.emotion) {
+        case 'angry': countByEmotion[0]++; break;    
+        case 'happy': countByEmotion[1]++; break;
+        case 'sad': countByEmotion[2]++; break;
+      }
+    });
+    
+    var colorCluster = countByEmotion.indexOf(Math.max.apply(null, countByEmotion));
     var digits = (count+'').length;
     return new L.divIcon({
       html: count,
-      className: 'cluster digits-'+digits,
+      className: 'cluster digits-'+digits + ' ' + classCluster[colorCluster],
       iconSize: null
     });
   }

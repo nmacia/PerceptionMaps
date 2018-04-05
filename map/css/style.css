@@ -78,7 +78,6 @@
 /*========== MARKER CLUSTER ==========*/
 
 .cluster {
-  background: #ffcd05;
   border: 1px solid #ffcd05;
   border-radius: 50%;
   color: #ffffff;
@@ -97,6 +96,18 @@
   position: absolute;
   top: 1px;
   z-index: -1;
+}
+
+.cluster-angry {
+  background: #b12b25;
+}
+
+.cluster-happy {
+  background: #ffcd05;
+}
+
+.cluster-sad {
+  background: #3393c7;
 }
 
 .digits-1 {
@@ -169,7 +180,7 @@
 
 .leaflet-control-layers {
   background-color: #000;
-  border-radius: 0px;
+  border-radius: 0;
 }
 
 /*
@@ -188,12 +199,12 @@
 }
 
 .leaflet-touch .leaflet-bar{
-  border-radius: 0px;
+  border-radius: 0;
   border: 1px solid rgb(255, 255, 255);
 }
 
 .leaflet-touch .leaflet-bar a {
-  border-radius: 0px !important;
+  border-radius: 0 !important;
 }
 
 
