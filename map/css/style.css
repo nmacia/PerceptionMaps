@@ -183,14 +183,12 @@
   border-radius: 0;
 }
 
-/*
-.leaflet-control-layers .title-lay {
-    margin-top: 0px;
-    margin-bottom: 5px;
-    font-size: 15;
-  color: white;
+.leaflet-control-layers .title-layer {
+  color: #ffffff;
+  font-size: 15px;
+  margin-bottom: 5px;  
+  margin-top: 0px;
 }
-*/
 
 .leaflet-bar a, .leaflet-bar a:hover {
     background-color: #000000;

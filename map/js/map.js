@@ -155,5 +155,10 @@ function definePopup(feature) {
   return popupText;
 }
 
+window.onload = function() {
+  // Add title to controls and overlays.
+  $( ".leaflet-control-layers-base" ).prepend( "<p class='title-layer'>Maps</p>" );
+  $( ".leaflet-control-layers-overlays" ).prepend( "<p class='title-layer'>Emotions</p>" );
+}
 
 
