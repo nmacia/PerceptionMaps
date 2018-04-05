@@ -89,10 +89,13 @@ var markers = L.markerClusterGroup({
   disableClusteringAtZoom: 20,
   elementsPlacementStrategy: "original-locations",
   polygonOptions: {
-    color: '#2d84c8',
-    weight: 4,
+    color: '#ffcd05',
+    weight: 2,
     opacity: 1,
-    fillOpacity: 0.5
+    //dashArray: '10,5',
+    lineJoin: 'miter',
+    lineCap: 'butt',
+    fillOpacity: 0.3
   },
   iconCreateFunction: function(cluster) {
     var count = cluster.getChildCount();

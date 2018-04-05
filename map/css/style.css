@@ -153,4 +153,47 @@
   width: 30px;
 }
 
+/*========== Control bars ==========*/
+
+
+.leaflet-control-layers .leaflet-control-layers-list {
+    font-family: "Lato", sans-serif;
+    text-transform: capitalize;
+    color: white;
+    padding: 5px;
+}
+
+.leaflet-touch .leaflet-control-layers {
+  border-style: hidden;
+} 
+
+.leaflet-control-layers {
+  background-color: #000;
+  border-radius: 0px;
+}
+
+/*
+.leaflet-control-layers .title-lay {
+    margin-top: 0px;
+    margin-bottom: 5px;
+    font-size: 15;
+  color: white;
+}
+*/
+
+.leaflet-bar a, .leaflet-bar a:hover {
+    background-color: #000000;
+    border-bottom: 2px solid #fff;
+    color: white;
+}
+
+.leaflet-touch .leaflet-bar{
+  border-radius: 0px;
+  border: 1px solid rgb(255, 255, 255);
+}
+
+.leaflet-touch .leaflet-bar a {
+  border-radius: 0px !important;
+}
+
 
