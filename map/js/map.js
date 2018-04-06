@@ -89,7 +89,7 @@ var markers = L.markerClusterGroup({
   disableClusteringAtZoom: 20,
   elementsPlacementStrategy: "original-locations",
   polygonOptions: {
-    color: '#ffcd05',
+    color: '#000000',
     weight: 2,
     opacity: 1,
     //dashArray: '10,5',
