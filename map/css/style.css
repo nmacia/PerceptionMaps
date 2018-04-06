@@ -78,7 +78,6 @@
 /*========== MARKER CLUSTER ==========*/
 
 .cluster {
-  border: 1px solid #ffcd05;
   border-radius: 50%;
   color: #ffffff;
   font-family: "Lato", sans-serif;
@@ -100,14 +99,17 @@
 
 .cluster-angry {
   background: #b12b25;
+  border: 1px solid #b12b25;
 }
 
 .cluster-happy {
   background: #ffcd05;
+  border: 1px solid #ffcd05;
 }
 
 .cluster-sad {
   background: #3393c7;
+  border: 1px solid #3393c7;
 }
 
 .digits-1 {
