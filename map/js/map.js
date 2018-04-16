@@ -1,5 +1,5 @@
-
-var mymap = L.map('dm4ym');
+var bodyId = document.body.id;
+var mymap = L.map(bodyId);
 
 // Add title layer.
 var mapNik = L.tileLayer.provider('OpenStreetMap.Mapnik');
@@ -38,8 +38,9 @@ categoryName,
 categoryArray;
 
 var geocsvLayer;
+var inputFile = '../data/output.csv';
 
-jQuery.get('output.csv', function(csvContents) {
+jQuery.get(inputFile, function(csvContents) {
     geocsvLayer = L.geoCsv(csvContents, {
     latitudeTitle: 'GPSLatitude',
     longitudeTitle: 'GPSLongitude',
@@ -160,5 +161,3 @@ window.onload = function() {
   $( ".leaflet-control-layers-base" ).prepend( "<p class='title-layer'>Maps</p>" );
   $( ".leaflet-control-layers-overlays" ).prepend( "<p class='title-layer'>Emotions</p>" );
 }
-
-

@@ -2,3 +2,4 @@
 uploads
 *.geojson
 map/output.csv
+data/output.csv
