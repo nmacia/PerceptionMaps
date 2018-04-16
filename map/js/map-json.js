@@ -127,24 +127,24 @@ function definePopup(feature) {
   var emotion = props.Emotion;
   var popupText = `
   <div class="containerinfo">
-  <div class= "box-logo-and-emotion">
-  <div class= "logo sqre">
-  <img src="img/logodm4ym.png">
-  </div>
-  <div class= "emotion sqre">` +
-  '            <img src="svg/'+ emotion+ '.svg"> ' +
-  '            <p class="emotion-name">'+emotion +'</p> '+
-  `        </div>
-  </div>
-  <div class= "box-text">
-  <!--get from table description --> ` +
-  '          <p><b>date:</b> ' + props.Date + ' ' + props.Time + '</p> ' +
-  '          <p><b>description:</b>'+ ' ' + props.Notes +'</p> ' +
-  `       </div>
-  <div class= "box-img"> ` +
-  "<img src='"+ props.SourceFile +"'"+
-  ">"+"</img>" +
-  `        </div>
+    <div class= "box-logo-and-emotion">
+      <div class= "logo sqre">
+        <img src="img/logodm4ym.png">
+      </div>
+      <div class= "emotion sqre">` +
+      ' <img src="svg/' + emotion + '.svg"> ' +
+      ' <p class="emotion-name">' + emotion + '</p>'+
+      `</div>
+    </div>
+    <div class= "box-text">
+    <!--get from table description --> ` +
+    ' <p><b>classroom:</b> ' + props.Classroom + '</p> ' +
+    ' <p><b>date:</b> ' + props.Date + ' ' + props.Time + '</p> ' +
+    ' <p><b>description:</b>' + ' ' + props.Notes + '</p>' +
+    `</div>
+    <div class= "box-img"> ` +
+    " <img src='" + props.SourceFile + "' />" +
+    `</div>
   </div>
   `;
 
